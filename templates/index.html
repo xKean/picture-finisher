@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Image Finisher</title>
+</head>
+<body>
+    <h1>Upload your drawing</h1>
+    <form id="uploadForm">
+        <input type="file" id="image" name="image" accept="image/*" required>
+        <br><br>
+        <label for="prompt">What is your drawing supposed to be?</label>
+        <input type="text" id="prompt" name="prompt" required>
+        <br><br>
+        <button type="submit">Generate</button>
+    </form>
+
+    <h2>Generated Image</h2>
+    <img id="generatedImage" src="" alt="Generated Image" style="display:none; max-width: 512px;">
+
+    <script>
+        document.getElementById("uploadForm").addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const formData = new FormData();
+            formData.append("image", document.getElementById("image").files[0]);
+            formData.append("prompt", document.getElementById("prompt").value);
+
+            const response = await fetch("/generate", {
+                method: "POST",
+                body: formData,
+            });
+
+            const result = await response.json();
+            if (result.image) {
+                const generatedImage = document.getElementById("generatedImage");
+                generatedImage.src = `data:image/png;base64,${result.image}`;
+                generatedImage.style.display = "block";
+            } else {
+                alert("Error generating image.");
+            }
+        });
+    </script>
+</body>
+</html>
