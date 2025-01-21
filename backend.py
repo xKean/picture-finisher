@@ -7,7 +7,9 @@ import io
 app = Flask(__name__)
 
 # Automatic1111 API endpoint
-AUTOMATIC1111_API_URL = "http://localhost:7860/sdapi/v1/txt2img"
+#AUTOMATIC1111_API_URL = "http://localhost:7860/sdapi/v1/txt2img"
+AUTOMATIC1111_API_URL = "http://localhost:7860/sdapi/v1/img2img"
+
 
 @app.route("/")
 def index():
@@ -30,8 +32,8 @@ def generate_image():
         "prompt": prompt,
         "init_images": [image_base64],
         "steps": 50,
-        "width": 128,
-        "height": 128,
+        "width": 512,
+        "height": 512,
     }
 
     # Send request to Automatic1111
