@@ -1,7 +1,9 @@
 from flask import Flask, request, render_template, jsonify
 from PIL import Image
 from apiclient import getApiClient
+from comfyApi import generateComfyImage
 from misc import base64Image
+from ollama_api import describe_Image, generate_Prompt
 
 app = Flask(__name__)
 
@@ -23,9 +25,15 @@ def generate_image():
     # Bild verarbeiten
     image = Image.open(uploaded_file).convert("RGB")
 
-    # Bild mit API generieren
-    result = api.img2img(images=[image], prompt=prompt)
+    description = describe_Image(image, prompt)
+    print(description)
 
+    prompt = generate_Prompt(description)
+    print(prompt)
+
+    # Bild mit API generieren
+    #result = api.img2img(images=[image], prompt=prompt)
+    result = generateComfyImage(image, prompt)
     # Das generierte Bild in einen Base64-String umwandeln
     returnImage = base64Image(result.image);
 
