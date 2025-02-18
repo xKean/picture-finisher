@@ -85,7 +85,7 @@
   },
   "19": {
     "inputs": {
-      "text": "a small drawing, dog, kids drawing, pencil drawing"
+      "text": ""
     },
     "class_type": "ttN text",
     "_meta": {
@@ -206,14 +206,19 @@
         "type": "PowerLoraLoaderHeaderWidget"
       },
       "lora_1": {
-        "on": true,
+        "on": false,
         "lora": "5yocrayon1_cap_d6a3e12.safetensors",
         "strength": 0.73
       },
       "lora_2": {
-        "on": true,
+        "on": false,
         "lora": "Hand_drawn_pencil_drawing.safetensors",
         "strength": 0.7
+      },
+      "lora_3": {
+        "on": false,
+        "lora": "FluxMythP0rtr4itStyle.safetensors",
+        "strength": 1
       },
       "➕ Add Lora": "",
       "model": ["3", 0],
