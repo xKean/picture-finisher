@@ -1,55 +1,5 @@
 {
-  "6": {
-    "inputs": {
-      "text": "a portrait of a young woman from the 80s wearing clothing\nfrom 1988,pink sunglasses and heavy blue makeup. in\nbackground the interior of a video store",
-      "clip": [
-        "11",
-        0
-      ]
-    },
-    "class_type": "CLIPTextEncode",
-    "_meta": {
-      "title": "CLIP Text Encode (Prompt)"
-    }
-  },
-  "8": {
-    "inputs": {
-      "samples": [
-        "13",
-        1
-      ],
-      "vae": [
-        "10",
-        0
-      ]
-    },
-    "class_type": "VAEDecode",
-    "_meta": {
-      "title": "VAE Decode"
-    }
-  },
-  "10": {
-    "inputs": {
-      "vae_name": "fluxVaeSft_aeSft.sft"
-    },
-    "class_type": "VAELoader",
-    "_meta": {
-      "title": "Load VAE"
-    }
-  },
-  "11": {
-    "inputs": {
-      "clip_name1": "t5xxl_fp16.safetensors",
-      "clip_name2": "clip_l.safetensors",
-      "type": "flux",
-      "device": "default"
-    },
-    "class_type": "DualCLIPLoader",
-    "_meta": {
-      "title": "DualCLIPLoader"
-    }
-  },
-  "12": {
+  "1": {
     "inputs": {
       "unet_name": "flux_dev.safetensors",
       "weight_dtype": "fp8_e4m3fn"
@@ -59,68 +9,115 @@
       "title": "Load Diffusion Model"
     }
   },
+  "3": {
+    "inputs": {
+      "lora_name": "FLUX.1-Turbo-Alpha.safetensors",
+      "strength_model": 1,
+      "strength_clip": 1,
+      "model": ["1", 0],
+      "clip": ["4", 0]
+    },
+    "class_type": "LoraLoader",
+    "_meta": {
+      "title": "Load LoRA"
+    }
+  },
+  "4": {
+    "inputs": {
+      "clip_name1": "t5xxl_fp8_e4m3fn.safetensors",
+      "clip_name2": "ViT-L-14-TEXT-detail-improved-hiT-GmP-TE-only-HF.safetensors",
+      "type": "flux",
+      "device": "default"
+    },
+    "class_type": "DualCLIPLoader",
+    "_meta": {
+      "title": "DualCLIPLoader"
+    }
+  },
+  "5": {
+    "inputs": {
+      "vae_name": "flux_dev_vae.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "Load VAE"
+    }
+  },
+  "7": {
+    "inputs": {
+      "text": ["19", 0],
+      "clip": ["52", 1]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Positive Prompt)"
+    }
+  },
   "13": {
     "inputs": {
-      "noise": [
-        "25",
-        0
-      ],
-      "guider": [
-        "22",
-        0
-      ],
-      "sampler": [
-        "16",
-        0
-      ],
-      "sigmas": [
-        "17",
-        0
-      ],
-      "latent_image": [
-        "52",
-        0
-      ]
+      "width": 1024,
+      "height": 1024,
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage",
+    "_meta": {
+      "title": "Empty Latent Image"
+    }
+  },
+  "15": {
+    "inputs": {
+      "samples": ["22", 1],
+      "vae": ["5", 0]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "16": {
+    "inputs": {
+      "images": ["15", 0]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "19": {
+    "inputs": {
+      "text": "a small drawing, dog, kids drawing, pencil drawing"
+    },
+    "class_type": "ttN text",
+    "_meta": {
+      "title": "Positive Prompt"
+    }
+  },
+  "22": {
+    "inputs": {
+      "noise": ["23", 0],
+      "guider": ["24", 0],
+      "sampler": ["25", 0],
+      "sigmas": ["26", 0],
+      "latent_image": ["50", 0]
     },
     "class_type": "SamplerCustomAdvanced",
     "_meta": {
       "title": "SamplerCustomAdvanced"
     }
   },
-  "16": {
+  "23": {
     "inputs": {
-      "sampler_name": "euler"
+      "noise_seed": 339154515256549
     },
-    "class_type": "KSamplerSelect",
+    "class_type": "RandomNoise",
     "_meta": {
-      "title": "KSamplerSelect"
+      "title": "RandomNoise"
     }
   },
-  "17": {
+  "24": {
     "inputs": {
-      "scheduler": "simple",
-      "steps": 20,
-      "denoise": 0.75,
-      "model": [
-        "28",
-        0
-      ]
-    },
-    "class_type": "BasicScheduler",
-    "_meta": {
-      "title": "BasicScheduler"
-    }
-  },
-  "22": {
-    "inputs": {
-      "model": [
-        "28",
-        0
-      ],
-      "conditioning": [
-        "29",
-        0
-      ]
+      "model": ["49", 0],
+      "conditioning": ["47", 0]
     },
     "class_type": "BasicGuider",
     "_meta": {
@@ -129,54 +126,38 @@
   },
   "25": {
     "inputs": {
-      "noise_seed": 6
+      "sampler_name": "euler"
     },
-    "class_type": "RandomNoise",
+    "class_type": "KSamplerSelect",
     "_meta": {
-      "title": "RandomNoise"
+      "title": "KSamplerSelect"
     }
   },
   "26": {
     "inputs": {
-      "images": [
-        "8",
-        0
-      ]
+      "scheduler": "simple",
+      "steps": 8,
+      "denoise": 0.85,
+      "model": ["49", 0]
     },
-    "class_type": "PreviewImage",
+    "class_type": "BasicScheduler",
     "_meta": {
-      "title": "Preview Image"
-    }
-  },
-  "28": {
-    "inputs": {
-      "max_shift": 1.1500000000000001,
-      "base_shift": 0.5,
-      "width": [
-        "48",
-        1
-      ],
-      "height": [
-        "48",
-        2
-      ],
-      "model": [
-        "12",
-        0
-      ]
-    },
-    "class_type": "ModelSamplingFlux",
-    "_meta": {
-      "title": "ModelSamplingFlux"
+      "title": "BasicScheduler"
     }
   },
   "29": {
     "inputs": {
+      "image": ""
+    },
+    "class_type": "ETN_LoadImageBase64",
+    "_meta": {
+      "title": "Load Image (Base64)"
+    }
+  },
+  "47": {
+    "inputs": {
       "guidance": 3.5,
-      "conditioning": [
-        "6",
-        0
-      ]
+      "conditioning": ["7", 0]
     },
     "class_type": "FluxGuidance",
     "_meta": {
@@ -185,56 +166,71 @@
   },
   "48": {
     "inputs": {
-      "resolution": "1024x1024 (1.0)",
-      "batch_size": 1,
-      "width_override": 0,
-      "height_override": 0
-    },
-    "class_type": "SDXLEmptyLatentSizePicker+",
-    "_meta": {
-      "title": "🔧 Empty Latent Size Picker"
-    }
-  },
-  "50": {
-    "inputs": {
-      "image": "example.png",
-      "upload": "image"
-    },
-    "class_type": "LoadImage",
-    "_meta": {
-      "title": "Load Image"
-    }
-  },
-  "51": {
-    "inputs": {
       "upscale_method": "lanczos",
       "width": 1024,
       "height": 1024,
       "crop": "disabled",
-      "image": [
-        "50",
-        0
-      ]
+      "image": ["29", 0]
     },
     "class_type": "ImageScale",
     "_meta": {
       "title": "Upscale Image"
     }
   },
-  "52": {
+  "49": {
     "inputs": {
-      "pixels": [
-        "51",
-        0
-      ],
-      "vae": [
-        "10",
-        0
-      ]
+      "max_shift": 1.15,
+      "base_shift": 0.5,
+      "width": 1024,
+      "height": 1024,
+      "model": ["52", 0]
+    },
+    "class_type": "ModelSamplingFlux",
+    "_meta": {
+      "title": "ModelSamplingFlux"
+    }
+  },
+  "50": {
+    "inputs": {
+      "pixels": ["48", 0],
+      "vae": ["5", 0]
     },
     "class_type": "VAEEncode",
     "_meta": {
       "title": "VAE Encode"
+    }
+  },
+  "52": {
+    "inputs": {
+      "PowerLoraLoaderHeaderWidget": {
+        "type": "PowerLoraLoaderHeaderWidget"
+      },
+      "lora_1": {
+        "on": true,
+        "lora": "5yocrayon1_cap_d6a3e12.safetensors",
+        "strength": 0.73
+      },
+      "lora_2": {
+        "on": true,
+        "lora": "Hand_drawn_pencil_drawing.safetensors",
+        "strength": 0.7
+      },
+      "➕ Add Lora": "",
+      "model": ["3", 0],
+      "clip": ["3", 1]
+    },
+    "class_type": "Power Lora Loader (rgthree)",
+    "_meta": {
+      "title": "Power Lora Loader (rgthree)"
+    }
+  },
+  "53": {
+    "inputs": {
+      "images": ["15", 0]
+    },
+    "class_type": "SaveImageWebsocket",
+    "_meta": {
+      "title": "SaveImageWebsocket"
     }
   }
 }
