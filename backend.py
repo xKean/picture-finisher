@@ -32,10 +32,9 @@ def generate_image():
     print(prompt)
 
     # Bild mit API generieren
-    #result = api.img2img(images=[image], prompt=prompt)
     result = generateComfyImage(image, prompt)
     # Das generierte Bild in einen Base64-String umwandeln
-    returnImage = base64Image(result.image);
+    returnImage = base64Image(result.image)
 
     return jsonify({"image": returnImage})
 
