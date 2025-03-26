@@ -59,7 +59,7 @@ with gr.Blocks() as demo:
         )
         prompt_textbox = gr.Textbox(
             lines=2,
-            placeholder="Was wurde gemalt?",
+            placeholder="What does your picture show?",
             label="Prompt"
         )
         submit_btn = gr.Button("Absenden")
@@ -72,7 +72,7 @@ with gr.Blocks() as demo:
                 type="numpy",
                 canvas_size=(1024, 1024),
                 label="Zeichne dein Bild",
-                height=600,
+                height=700,
                 width=600
             )
         # Ergebnis-Ansicht: Zeigt die Vorschau (Input) und das generierte Bild (Output) nebeneinander

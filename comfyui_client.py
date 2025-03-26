@@ -11,7 +11,7 @@ from utils import base64Image
 from styles import style_config
 
 # Konfiguration
-server_address = "172.16.48.139:8188"
+server_address = "127.0.0.1:8188"
 save_websocked_id = '53'  # ID des Nodes, der das Bild liefert
 client_id = str(uuid.uuid4())
 
